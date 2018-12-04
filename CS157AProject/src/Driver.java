@@ -28,7 +28,7 @@ public class Driver {
 			InsertData insert = new InsertData(stmt, conn);
 			insert.fillTable();
 
-			
+
 			//First SQL statement
 			//Select all authors from the author's table and order all of them based on alphabetical order.
 			String query1 = "select * from authors ORDER BY firstName ASC, lastName ASC";
@@ -38,15 +38,15 @@ public class Driver {
 			{
 				int authorId = resultset.getInt(1);
 				String name = resultset.getString(2);
-				
+
 				System.out.println("                        " + authorId + "  "+ name);
 			}
 			System.out.println(
 					"*****************************************************************************************"); 
-			
-			
-			
-			
+
+
+
+
 			//Second SQL statement
 			//Select all publishers from publisher table
 			String query2 = "select * from publishers";
@@ -56,17 +56,17 @@ public class Driver {
 			{
 				String publisherName = resultset2.getString(2);
 				int publisherId = resultset2.getInt(1);
-				
+
 				System.out.println("                         "  + publisherId + "   " + publisherName);
 			}
 			System.out.println(
 					"*****************************************************************************************"); 
-			
-			
-			
-			
+
+
+
+
 			//Third SQL statement
-			//select specific publishers with id from 1 to 18, so we select 17 publishers. 
+			//select specific publishers with id from 1 to 18 
 
 			for (int i = 1; i < 19; i++)
 			{
@@ -84,9 +84,9 @@ public class Driver {
 			}
 			System.out.println(
 					"*****************************************************************************************"); 
-			
-			
-			
+
+
+
 
 			//Fourth SQL statement
 			//add new author
@@ -103,8 +103,8 @@ public class Driver {
 			}
 			System.out.println(
 					"*****************************************************************************************"); 
-			
-			
+
+
 
 			//Fifth SQL statement
 			//Edit/Update the existing information about an author
@@ -115,7 +115,7 @@ public class Driver {
 			ResultSet rs2 = stmt.executeQuery(subquery);
 			while (rs2.next())
 			{
-				
+
 				String first = rs2.getString(2);
 				String last = rs2.getString(3);
 				int Id = rs2.getInt(1);
@@ -123,8 +123,8 @@ public class Driver {
 			}
 			System.out.println(
 					"*****************************************************************************************"); 
-			
-			
+
+
 
 			//Sixth SQL statement
 			//Add a new title for an author
@@ -132,7 +132,7 @@ public class Driver {
 			stmt.executeUpdate(query6);
 			String sub3 = "Select * from titles";
 			ResultSet rs3 = stmt.executeQuery(sub3);
-			
+
 			while (rs3.next())
 			{
 				String isbn, titles, year;
@@ -147,13 +147,13 @@ public class Driver {
 						+ " " + "Edition: " + edition + " " + "Year: " + year
 						+ " " + "PublisherId: " + publisher + " " + "Price: "
 						+ price);
-				
-				
+
+
 			}
 			System.out.println(
 					"*****************************************************************************************"); 
-			
-			
+
+
 
 			//Seventh SQL statement
 			//Add new publisher
@@ -162,7 +162,7 @@ public class Driver {
 			String sub4 = "Select * from publishers";
 			ResultSet rs4 = stmt.executeQuery(sub4);
 			System.out.println("Publisher's information: ID   Name");
-			
+
 			while (rs4.next())
 			{
 				int id = rs4.getInt(1);
@@ -171,8 +171,8 @@ public class Driver {
 			}
 			System.out.println(
 					"*****************************************************************************************"); 
-			
-			
+
+
 
 			//Eighth SQL statement
 			//Edit/Update the existing information about a publisher
@@ -180,18 +180,18 @@ public class Driver {
 			stmt.executeUpdate(query8);
 			String sub5 = "Select * from publishers";
 			ResultSet rs5 = stmt.executeQuery(sub5);
-			
+
 			System.out.println("Publisher's information: ID   Name");
 			while (rs5.next())
 			{
 				String name = rs5.getString(2);
 				int id = rs5.getInt(1);
-				
+
 				System.out.println("                         "  + id + "   " + name);
 			}
-			
+
 			//terminating process once we are done
-			 stmt.close();
+			stmt.close();
 
 
 		}
@@ -199,9 +199,16 @@ public class Driver {
 			exc.printStackTrace();
 		}   
 		//close the connection
-		conn.close();
+		finally {         
+			try { 
+				conn.close( ); 
+			}         
+			catch (SQLException  se)
+			{se.printStackTrace();}
+		}
 	}
-
-
-
 }
+
+
+
+
