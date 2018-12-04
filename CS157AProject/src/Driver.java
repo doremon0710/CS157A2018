@@ -66,22 +66,23 @@ public class Driver {
 
 
 			//Third SQL statement
-			//select specific publishers with id from 1 to 18 
+			//select specific publishers with id of 16. This publisher currently has 2 books published. We short them by title in ascending order
+				String querys = "Insert into titles(isbn, title, editionNumber, year, publisherID, price) values ('250', ' Database System ', 8,'2010', 16, 150)";
+				stmt.executeUpdate(querys);
 
-			for (int i = 1; i < 19; i++)
-			{
-				String query3 = "Select title, isbn, year from titles where publisherId= "
-						+ i + " ";
+			
+				String query3 = "Select title, isbn, year from titles where publisherId= " +16+
+						 " " +"ORDER BY title ASC";
 				ResultSet resultset3 = stmt.executeQuery(query3);
 				while (resultset3.next())
 				{
 					String title = resultset3.getString(1);
 					String isbn = resultset3.getString(2);
 					String year = resultset3.getString(3);
-					System.out.println("Title:" + title + "ISBN:" + title
-							+ "Year:" + year);
+					System.out.println("Title:" + title + "ISBN: "  + isbn
+							+ " Year:" + year+"\n");
 				}
-			}
+			
 			System.out.println(
 					"*****************************************************************************************"); 
 
@@ -109,7 +110,7 @@ public class Driver {
 			//Fifth SQL statement
 			//Edit/Update the existing information about an author
 
-			String query5 = "Update authors set firstname='Ahmed' where authorid=1";
+			String query5 = "Update authors set firstname='John' where authorid=1";
 			stmt.executeUpdate(query5);
 			String subquery = "Select * from authors";
 			ResultSet rs2 = stmt.executeQuery(subquery);
