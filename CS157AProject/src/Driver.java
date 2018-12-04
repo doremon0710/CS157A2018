@@ -66,7 +66,7 @@ public class Driver {
 			
 			
 			//Third SQL statement
-			//select a specific publisher
+			//select specific publishers with id from 1 to 18, so we select 17 publishers. 
 
 			for (int i = 1; i < 19; i++)
 			{
